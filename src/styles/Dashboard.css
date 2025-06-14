@@ -17,6 +17,7 @@ html {
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .dashboard-header {
@@ -32,6 +33,7 @@ html {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(8px);
+  flex-wrap: wrap;
 }
 
 .dashboard-header-left h3 {
@@ -43,18 +45,18 @@ html {
 .dashboard-header-right {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .settings-fixed-button {
-  margin-right: 10px;
   font-size: 14px;
   text-decoration: none;
   background-color: #eee;
-  padding: 4px 8px;
+  padding: 6px 12px;
   border-radius: 6px;
   color: #333;
   transition: background 0.3s ease;
-  margin-left: 20px;
 }
 
 .settings-fixed-button:hover {
@@ -64,13 +66,12 @@ html {
 .logout-btn {
   background: linear-gradient(135deg, #7b4397, #dc2430);
   color: white;
-  padding: 4px 10px;
+  padding: 6px 14px;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  margin-left: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: background 0.3s ease;
 }
@@ -105,6 +106,8 @@ html {
   border: 1px solid #ccc;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .task-entry-container textarea {
@@ -140,6 +143,8 @@ html {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .task-card:hover {
@@ -185,9 +190,55 @@ html {
   z-index: 20;
 }
 
+/* 🌐 Mobile Responsive Styling */
 @media (max-width: 768px) {
-  .container {
-    padding: 10px;
+  .dashboard-container {
+    padding: 12px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .dashboard-header-left h3 {
+    font-size: 16px;
+  }
+
+  .task-card {
     font-size: 14px;
+    padding: 12px;
+  }
+
+  .task-entry-container {
+    position: relative;
+    top: 0;
+  }
+
+  .logout-btn,
+  .settings-fixed-button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .task-list {
+    padding-right: 0;
+  }
+
+  .ai-assistant-container {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .toast-stack-container {
+    bottom: 90px;
+    right: 20px;
+    max-width: 90vw;
+  }
+
+  .toast-container {
+    font-size: 13px;
+    padding: 10px 14px;
   }
 }
