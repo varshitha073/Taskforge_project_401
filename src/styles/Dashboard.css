@@ -1,39 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body,
-html {
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
   color: #333;
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
+  overflow: auto;
 }
 
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
+  min-height: 100vh;
+  padding: 16px;
 }
 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 16px;
-  margin-bottom: 12px;
+  flex-wrap: wrap;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 12px 16px;
+  margin-bottom: 14px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 10;
-  backdrop-filter: blur(8px);
-  flex-wrap: wrap;
+  backdrop-filter: blur(6px);
 }
 
 .dashboard-header-left h3 {
@@ -44,9 +45,9 @@ html {
 
 .dashboard-header-right {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
 }
 
 .settings-fixed-button {
@@ -56,6 +57,7 @@ html {
   padding: 6px 12px;
   border-radius: 6px;
   color: #333;
+  margin-right: 10px;
   transition: background 0.3s ease;
 }
 
@@ -72,6 +74,7 @@ html {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  margin-top: 6px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: background 0.3s ease;
 }
@@ -80,16 +83,13 @@ html {
   background: linear-gradient(135deg, #5e2a7d, #b51f29);
 }
 
+/* 🧩 Task Entry */
 .task-entry-container {
-  position: sticky;
-  top: 90px;
-  z-index: 9;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 16px;
   border-radius: 12px;
-  backdrop-filter: blur(8px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .task-entry-container .task-card {
@@ -106,8 +106,6 @@ html {
   border: 1px solid #ccc;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .task-entry-container textarea {
@@ -128,10 +126,10 @@ html {
   background: linear-gradient(135deg, #5e2a7d, #b51f29);
 }
 
+/* 📋 Task List */
 .task-list {
   flex: 1;
   overflow-y: auto;
-  padding-right: 8px;
   padding-bottom: 100px;
 }
 
@@ -141,21 +139,18 @@ html {
   padding: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
   transition: transform 0.2s ease;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .task-card:hover {
   transform: scale(1.02);
 }
 
-/* 🔥 Toast FIX CSS */
+/* ✅ Toast */
 .toast-stack-container {
   position: fixed;
   bottom: 80px;
-  right: 30px;
+  right: 20px;
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -183,6 +178,7 @@ html {
   }
 }
 
+/* 🤖 AI Assistant */
 .ai-assistant-container {
   position: fixed;
   bottom: 16px;
@@ -190,7 +186,7 @@ html {
   z-index: 20;
 }
 
-/* 🌐 Mobile Responsive Styling */
+/* 📱 Mobile Responsiveness */
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 12px;
@@ -199,46 +195,21 @@ html {
   .dashboard-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
   }
 
-  .dashboard-header-left h3 {
-    font-size: 16px;
-  }
-
-  .task-card {
+  .task-entry-container,
+  .task-card,
+  .dashboard-header,
+  .toast-container {
     font-size: 14px;
-    padding: 12px;
-  }
-
-  .task-entry-container {
-    position: relative;
-    top: 0;
+    width: 100%;
   }
 
   .logout-btn,
   .settings-fixed-button {
-    font-size: 13px;
-    padding: 6px 10px;
-  }
-
-  .task-list {
-    padding-right: 0;
-  }
-
-  .ai-assistant-container {
-    bottom: 12px;
-    right: 12px;
-  }
-
-  .toast-stack-container {
-    bottom: 90px;
-    right: 20px;
-    max-width: 90vw;
-  }
-
-  .toast-container {
-    font-size: 13px;
-    padding: 10px 14px;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 8px;
   }
 }
