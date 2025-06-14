@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import React, { useState, useEffect } from "react";
+import {
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+  getRedirectResult,
+} from "firebase/auth";
 import { auth, googleProvider } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
 import "../styles/Auth.css";
@@ -10,6 +14,21 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // ✅ Handle Google Redirect result when coming back from sign-in
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result?.user) {
+          console.log("✅ Google Sign-in success:", result.user);
+          navigate("/dashboard");
+        }
+      })
+      .catch((error) => {
+        console.error("Google Sign-In Error:", error);
+        setError("❌ Google Sign-In failed. Try again.");
+      });
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,9 +43,7 @@ const Login = () => {
 
       if (err.code === "auth/user-not-found") {
         setError("❌ This email is not registered. Redirecting to register...");
-        console.log("⏳ Navigating to /register in 2s...");
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        console.log("➡️ Redirecting now...");
         navigate("/register");
       } else if (err.code === "auth/wrong-password") {
         setError("❌ Incorrect password. Please try again.");
@@ -40,18 +57,11 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = () => {
     setError("");
     setLoading(true);
-    try {
-      await signInWithPopup(auth, googleProvider);
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Google Sign-In Error:", error);
-      setError("❌ Google Sign-In failed. Try again.");
-    } finally {
-      setLoading(false);
-    }
+    // ✅ Use redirect instead of popup for mobile compatibility
+    signInWithRedirect(auth, googleProvider);
   };
 
   return (

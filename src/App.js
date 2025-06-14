@@ -9,43 +9,44 @@ import { auth } from './firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 
 const App = () => {
-  const [user, setUser] = useState(undefined); 
+  const [user, setUser] = useState(undefined); // undefined: still checking
   const [theme, setTheme] = useState('light');
 
-  // Check user authentication status
+  // 🔒 Monitor Firebase Auth
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("🔥 Auth state changed:", currentUser);
-      setUser(currentUser ?? null);
+      setUser(currentUser ?? null); // null = not signed in
     });
     return () => unsubscribe();
   }, []);
 
-  // Load theme from localStorage on app load
+  // 🌗 Load theme from localStorage on first load
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
     document.body.classList.toggle('dark', savedTheme === 'dark');
   }, []);
 
-  // Watch for theme changes
+  // 💡 Update body class when theme changes
   useEffect(() => {
     document.body.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  if (user === undefined) return <h1>⏳ Checking authentication...</h1>;
+  // 🔄 While checking login status (initial render)
+  if (user === undefined) return <h1 style={{ textAlign: 'center' }}>⏳ Checking authentication...</h1>;
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Welcome />} />
 
-        {/* Signup/Register Routes */}
+        {/* Sign Up Routes */}
         <Route path="/signup" element={<Register />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Login Route (redirect if already authenticated) */}
+        {/* Login */}
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
 
         {/* Protected Dashboard */}
@@ -57,7 +58,7 @@ const App = () => {
           element={user ? <Settings currentTheme={theme} setTheme={setTheme} /> : <Navigate to="/login" />}
         />
 
-        {/* Dev Test Route */}
+        {/* Optional: Test route */}
         <Route path="/test" element={<h1>✅ Test page working</h1>} />
       </Routes>
     </Router>
