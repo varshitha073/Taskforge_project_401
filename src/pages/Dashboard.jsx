@@ -1,5 +1,3 @@
-// ✅ Toast rendering FIXED at the bottom 👇
-
 import React, { useState, useEffect } from 'react';
 import TaskDetailsModal from '../components/TaskDetailsModal';
 import AIChatBot from '../components/AIChatBot';
@@ -17,7 +15,7 @@ import {
 } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import '../styles/Dashboard.css';
-import '../styles/AIChatBot.css'; 
+import '../styles/AIChatBot.css';
 
 // ✅ Toast component
 const Toast = ({ message }) => (
@@ -192,8 +190,9 @@ const Dashboard = () => {
         </div>
       </header>
 
+      {/* Task Input Section */}
       <div className="task-entry-container">
-        <div className="task-card">
+        <div className="task-card responsive-task-input">
           <input
             type="text"
             placeholder="Task Title"
@@ -215,15 +214,21 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-{/* ✅ Toast stack container with multiple messages */}
-<div className="toast-stack-container">
-  {showReminder && <Toast message={reminderText} />}
-  {toastMsg && <Toast message={toastMsg} />}
-</div>
 
-      <div className="task-list">
+      {/* Toast container */}
+      <div className="toast-stack-container">
+        {showReminder && <Toast message={reminderText} />}
+        {toastMsg && <Toast message={toastMsg} />}
+      </div>
+
+      {/* Task List Section */}
+      <div className="task-list responsive-task-list">
         {tasks.map((task) => (
-          <div key={task.id} className="task-card" onClick={() => handleTaskClick(task)}>
+          <div
+            key={task.id}
+            className="task-card task-card-responsive"
+            onClick={() => handleTaskClick(task)}
+          >
             <h4>{task.title}</h4>
             <p>{task.completed ? "✅ Completed" : "🕒 In Progress"}</p>
           </div>
@@ -238,12 +243,13 @@ const Dashboard = () => {
         onToggleComplete={handleToggleComplete}
       />
 
-      {/* ✅ Toasts are wrapped together and positioned cleanly */}
-      <div style={{ position: 'fixed', bottom: '80px', right: '30px', zIndex: 9999 }}>
+      {/* Toast fixed on bottom right */}
+      <div style={{ position: 'fixed', bottom: '80px', right: '20px', zIndex: 9999 }}>
         {showReminder && <Toast message={reminderText} />}
         {toastMsg && <Toast message={toastMsg} />}
       </div>
 
+      {/* AI Assistant */}
       <div className="ai-assistant-container">
         <AIChatBot />
       </div>

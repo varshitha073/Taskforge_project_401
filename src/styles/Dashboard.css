@@ -147,7 +147,6 @@ html {
 }
 
 /* 🔥 Toast FIX CSS */
-
 .toast-stack-container {
   position: fixed;
   bottom: 80px;
@@ -155,7 +154,7 @@ html {
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 12px; /* spacing between multiple toasts */
+  gap: 12px;
 }
 
 .toast-container {
@@ -184,4 +183,11 @@ html {
   bottom: 16px;
   right: 16px;
   z-index: 20;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    font-size: 14px;
+  }
 }
