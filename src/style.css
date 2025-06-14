@@ -1,0 +1,138 @@
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Body Background - Gradient Animation */
+body {
+  height: 100vh;
+  background: linear-gradient(-45deg, #1e1e2f, #282a36, #1c1f2e, #000000);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glassmorphic Auth Card */
+.auth-form {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 40px;
+  width: 350px;
+  max-width: 95%;
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: fadeInUp 1s ease-out;
+  text-align: center;
+}
+
+/* Header text */
+.auth-form h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #00fff7;
+  text-shadow: 0 0 10px #00fff7;
+}
+
+/* Inputs */
+.auth-form input {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.auth-form input::placeholder {
+  color: #ccc;
+}
+
+.auth-form input:focus {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid #00fff7;
+}
+
+/* Buttons */
+.auth-form button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  background: #00fff7;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
+  transition: transform 0.2s;
+}
+
+.auth-form button:hover {
+  transform: scale(1.05);
+}
+
+/* Toggle and Message */
+.toggle-mode,
+.forgot-link,
+.auth-message {
+  margin-top: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.toggle-mode {
+  color: #00fff7;
+  text-decoration: underline;
+}
+
+.forgot-link {
+  color: #ff9aff;
+  text-decoration: underline;
+}
+
+.forgot-link:hover {
+  color: #fff;
+}
+
+.auth-message {
+  color: #f8ffae;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

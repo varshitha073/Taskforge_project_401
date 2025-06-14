@@ -1,0 +1,101 @@
+.td-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.td-modal-content {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+  font-family: 'Segoe UI', sans-serif;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.td-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.td-buttons {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.td-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.td-btn.edit {
+  background-color: #f39c12;
+}
+
+.td-btn.edit:hover {
+  background-color: #e67e22;
+}
+
+.td-btn.complete {
+  background-color: #27ae60;
+}
+
+.td-btn.complete:hover {
+  background-color: #1e8449;
+}
+
+.td-btn.delete {
+  background-color: #e74c3c;
+}
+
+.td-btn.delete:hover {
+  background-color: #c0392b;
+}
+
+.td-btn.close {
+  background-color: #7f8c8d;
+}
+
+.td-btn.close:hover {
+  background-color: #707b7c;
+}
+
+.td-complete {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.td-progress {
+  color: #f39c12;
+  font-weight: bold;
+}

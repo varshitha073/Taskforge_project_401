@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+}
+
+.settings-container {
+  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align from top so scroll can happen */
+  padding: 30px 20px;
+}
+
+.settings-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color: #333;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #000;
+}
+
+.alert-message {
+  background: rgba(255, 255, 255, 0.3);
+  border-left: 4px solid #6c63ff;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.setting-item {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-item label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.setting-item input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.85);
+  transition: 0.2s ease;
+}
+
+.setting-item input:focus {
+  border-color: #6c63ff;
+}
+
+.setting-item button {
+  margin-top: 10px;
+  background: #6c63ff;
+  color: #fff;
+  border: none;
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.setting-item button:hover {
+  background: #5e54d1;
+}
+
+.danger-zone label {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+.danger {
+  background-color: #e53935 !important;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.danger:hover {
+  background-color: #c62828 !important;
+}
+
+/* Back button at top left */
+.back-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #5e60ce;
+  color: white;
+  font-size: 16px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background: #4e50be;
+}
+
+@media (max-width: 500px) {
+  .settings-card {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .back-button {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+}
