@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import {
-  signInWithEmailAndPassword,
-  signInWithRedirect,
-  getRedirectResult,
-} from "firebase/auth";
-import { auth, googleProvider } from "../firebase/config";
+import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
 import "../styles/Auth.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,53 +13,52 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Handle Google Redirect result when coming back from sign-in
-  useEffect(() => {
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result?.user) {
-          console.log("✅ Google Sign-in success:", result.user);
-          navigate("/dashboard");
-        }
-      })
-      .catch((error) => {
-        console.error("Google Sign-In Error:", error);
-        setError("❌ Google Sign-In failed. Try again.");
-      });
-  }, [navigate]);
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+    console.log("🟡 Attempting login with:", email);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      console.log("✅ Login successful. Redirecting to dashboard...");
+      toast.success("🎉 Login successful!");
       navigate("/dashboard");
     } catch (err) {
-      console.error("Login Error:", err);
+      console.error("❌ Login Error:", err);
+      console.log("Firebase Error Code:", err.code);
 
-      if (err.code === "auth/user-not-found") {
-        setError("❌ This email is not registered. Redirecting to register...");
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        navigate("/register");
-      } else if (err.code === "auth/wrong-password") {
-        setError("❌ Incorrect password. Please try again.");
-      } else if (err.code === "auth/invalid-email") {
-        setError("❌ Invalid email format.");
-      } else {
-        setError("❌ Login failed. Please try again later.");
+      switch (err.code) {
+        case "auth/user-not-found":
+        case "auth/invalid-login-credentials":
+          setError("❌ Email not registered. Redirecting to register page...");
+          toast.info("ℹ️ Email not registered. Redirecting...");
+          console.log("🔁 Redirecting to /register in 2 seconds...");
+          setTimeout(() => {
+            navigate("/register");
+          }, 2000);
+          break;
+        case "auth/wrong-password":
+          setError("❌ Incorrect password. Please try again.");
+          toast.error("🚫 Incorrect password.");
+          break;
+        case "auth/invalid-email":
+          setError("❌ Invalid email format.");
+          toast.error("🚫 Invalid email format.");
+          break;
+        case "auth/too-many-requests":
+          setError("❌ Too many failed attempts. Please try again later.");
+          toast.warn("⚠️ Too many attempts. Try later.");
+          break;
+        default:
+          setError("❌ Unexpected error: " + err.message);
+          toast.error("⚠️ Unexpected error: " + err.message);
+          break;
       }
     } finally {
       setLoading(false);
+      console.log("🔄 Login process complete.");
     }
-  };
-
-  const handleGoogleLogin = () => {
-    setError("");
-    setLoading(true);
-    // ✅ Use redirect instead of popup for mobile compatibility
-    signInWithRedirect(auth, googleProvider);
   };
 
   return (
@@ -93,16 +90,19 @@ const Login = () => {
       </form>
 
       <button
-        onClick={handleGoogleLogin}
-        className="google-btn"
+        className="register-button"
+        onClick={() => {
+          console.log("➡️ Manually navigating to /register");
+          toast.info("🚀 Redirecting to Register...");
+          navigate("/register");
+        }}
         disabled={loading}
       >
-        🔵 Sign in with Google
+        ✨ New user? Create an account
       </button>
 
-      <p onClick={() => navigate("/register")} className="switch-link">
-        ✨ New user? Create an account
-      </p>
+      {/* Toast Notification Container */}
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

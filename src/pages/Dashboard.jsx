@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import TaskDetailsModal from '../components/TaskDetailsModal';
 import AIChatBot from '../components/AIChatBot';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, db } from '../firebase/config';
+import { auth, db, messaging } from '../firebase/config';
 import {
   collection,
   addDoc,
@@ -14,10 +14,10 @@ import {
   where
 } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
+import { getToken, onMessage } from 'firebase/messaging';
 import '../styles/Dashboard.css';
 import '../styles/AIChatBot.css';
 
-// ✅ Toast component
 const Toast = ({ message }) => (
   <div className="toast-container">
     <div className="toast-message">{message}</div>
@@ -47,22 +47,36 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (!user) return;
+    const registerFCM = async () => {
+      try {
+        const currentToken = await getToken(messaging, {
+          vapidKey: "YBP1qvW4SiIn5HkyXRwLYtpxvaIkg82pF9ZnP3uMX4X8B6YAVCezK50t3DlrgYm6bTjckoERAgbS_e5crKexTnD0"
+        });
 
-    const q = query(collection(db, 'tasks'), where('userId', '==', user.uid));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const taskList = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setTasks(taskList);
-      checkDueSoonTasks(taskList);
+        if (currentToken) {
+          console.log("✅ FCM Token:", currentToken);
+        } else {
+          console.warn("⚠️ No registration token available. Request permission to generate one.");
+        }
+      } catch (err) {
+        console.error("❌ Error fetching FCM token:", err);
+      }
+    };
+
+    onMessage(messaging, (payload) => {
+      console.log("📬 Foreground FCM Message:", payload);
+      if (payload.notification) {
+        new Notification(payload.notification.title, {
+          body: payload.notification.body,
+          icon: "/reminder-icon.png"
+        });
+      }
     });
 
-    return () => unsubscribe();
-  }, [user]);
+    registerFCM();
+  }, []);
 
-  const checkDueSoonTasks = (taskList) => {
+  const checkDueSoonTasks = useCallback((taskList) => {
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
@@ -78,7 +92,23 @@ const Dashboard = () => {
       setShowReminder(true);
       setTimeout(() => setShowReminder(false), 4000);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const q = query(collection(db, 'tasks'), where('userId', '==', user.uid));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const taskList = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setTasks(taskList);
+      checkDueSoonTasks(taskList);
+    });
+
+    return () => unsubscribe();
+  }, [user, checkDueSoonTasks]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -174,8 +204,24 @@ const Dashboard = () => {
   };
 
   const handleLogout = async () => {
-    await signOut(auth);
-    navigate('/login');
+    const confirmDelete = window.confirm("⚠️ Are you sure you want to logout and permanently delete your account?");
+    if (!confirmDelete) return;
+
+    try {
+      if (auth.currentUser) {
+        await auth.currentUser.delete(); // 🔥 Delete user account
+        console.log('✅ User account deleted');
+      }
+
+      await signOut(auth); // Sign out fallback
+      navigate('/login');
+    } catch (error) {
+      if (error.code === 'auth/requires-recent-login') {
+        alert("⚠️ Please re-login to delete your account.");
+      } else {
+        console.error('❌ Logout/Delete failed:', error);
+      }
+    }
   };
 
   return (
@@ -190,7 +236,6 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* Task Input Section */}
       <div className="task-entry-container">
         <div className="task-card responsive-task-input">
           <input
@@ -215,13 +260,11 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Toast container */}
       <div className="toast-stack-container">
         {showReminder && <Toast message={reminderText} />}
         {toastMsg && <Toast message={toastMsg} />}
       </div>
 
-      {/* Task List Section */}
       <div className="task-list responsive-task-list">
         {tasks.map((task) => (
           <div
@@ -243,13 +286,11 @@ const Dashboard = () => {
         onToggleComplete={handleToggleComplete}
       />
 
-      {/* Toast fixed on bottom right */}
       <div style={{ position: 'fixed', bottom: '80px', right: '20px', zIndex: 9999 }}>
         {showReminder && <Toast message={reminderText} />}
         {toastMsg && <Toast message={toastMsg} />}
       </div>
 
-      {/* AI Assistant */}
       <div className="ai-assistant-container">
         <AIChatBot />
       </div>

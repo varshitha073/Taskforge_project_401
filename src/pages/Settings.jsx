@@ -11,7 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import '../styles/Settings.css';
 
-const Settings = ({ setTheme, currentTheme }) => {
+const Settings = () => {
   const [displayName, setDisplayName] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -73,12 +73,6 @@ const Settings = ({ setTheme, currentTheme }) => {
       console.error(error);
       setAlertMsg('❌ Password update failed. Please check current password and try again.');
     }
-  };
-
-  const handleToggleTheme = () => {
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    setAlertMsg(`🌗 Theme changed to ${newTheme}`);
   };
 
   const handleDeleteAccount = async () => {
@@ -161,13 +155,6 @@ const Settings = ({ setTheme, currentTheme }) => {
             placeholder="Re-enter new password"
           />
           <button onClick={handleUpdatePassword}>Update Password</button>
-        </div>
-
-        <div className="setting-item">
-          <label>Theme</label>
-          <button onClick={handleToggleTheme}>
-            Switch to {currentTheme === 'light' ? '🌙 Dark' : '☀️ Light'} Mode
-          </button>
         </div>
 
         <div className="setting-item danger-zone">

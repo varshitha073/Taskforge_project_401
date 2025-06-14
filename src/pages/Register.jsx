@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
-import { auth, googleProvider } from "../firebase/config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
 import "../styles/Auth.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -22,36 +21,34 @@ const Register = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
+    console.log("🟢 Attempting registration with:", email);
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      alert("🎉 Account created successfully!");
+      toast.success("🎉 Account created successfully!");
+      console.log("✅ Account created. Redirecting to dashboard...");
       navigate("/dashboard");
     } catch (err) {
-      console.error("Registration Error:", err);
-      if (err.code === "auth/email-already-in-use") {
-        setError("❌ Email already in use. Try logging in.");
-      } else if (err.code === "auth/invalid-email") {
-        setError("❌ Invalid email format.");
-      } else if (err.code === "auth/weak-password") {
-        setError("❌ Password should be at least 6 characters.");
-      } else {
-        setError("❌ Registration failed. Please try again.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+      console.error("❌ Registration Error:", err);
 
-  const handleGoogleSignup = async () => {
-    setError("");
-    setLoading(true);
-    try {
-      await signInWithPopup(auth, googleProvider);
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Google Sign-In Error:", error);
-      setError("❌ Google Sign-In failed.");
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          setError("❌ Email already in use. Try logging in.");
+          toast.error("🚫 Email already in use.");
+          break;
+        case "auth/invalid-email":
+          setError("❌ Invalid email format.");
+          toast.error("🚫 Invalid email format.");
+          break;
+        case "auth/weak-password":
+          setError("❌ Password should be at least 6 characters.");
+          toast.error("⚠️ Weak password. Use at least 6 characters.");
+          break;
+        default:
+          setError("❌ Registration failed. Please try again.");
+          toast.error("⚠️ Something went wrong. Please try again.");
+          break;
+      }
     } finally {
       setLoading(false);
     }
@@ -84,13 +81,19 @@ const Register = () => {
         </button>
       </form>
 
-      <button onClick={handleGoogleSignup} className="google-btn" disabled={loading}>
-        🔵 Sign up with Google
-      </button>
-
-      <p onClick={() => navigate("/login")} className="switch-link">
+      <p
+        onClick={() => {
+          console.log("➡️ Navigating to /login");
+          toast.info("🔐 Redirecting to Login...");
+          navigate("/login");
+        }}
+        className="switch-link"
+      >
         🔐 Already have an account? Login
       </p>
+
+      {/* Toast container */}
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

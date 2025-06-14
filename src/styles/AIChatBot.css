@@ -12,7 +12,7 @@
 }
 
 .chat-header {
-  background: #6a5acd;
+background: linear-gradient(135deg, #7b4397, #dc2430);
   color: white;
   padding: 10px;
   border-top-left-radius: 12px;

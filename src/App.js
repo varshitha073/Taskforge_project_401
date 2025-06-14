@@ -7,16 +7,18 @@ import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import { auth } from './firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
-  const [user, setUser] = useState(undefined); // undefined: still checking
+  const [user, setUser] = useState(undefined); 
   const [theme, setTheme] = useState('light');
 
   // 🔒 Monitor Firebase Auth
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("🔥 Auth state changed:", currentUser);
-      setUser(currentUser ?? null); // null = not signed in
+      setUser(currentUser ?? null); 
     });
     return () => unsubscribe();
   }, []);
@@ -39,6 +41,7 @@ const App = () => {
 
   return (
     <Router>
+      <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
         <Route path="/" element={<Welcome />} />
 
