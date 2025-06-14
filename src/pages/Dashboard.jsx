@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import TaskDetailsModal from '../components/TaskDetailsModal';
 import AIChatBot from '../components/AIChatBot';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { auth, db, messaging } from '../firebase/config';
 import {
   collection,
@@ -13,7 +13,6 @@ import {
   query,
   where
 } from 'firebase/firestore';
-import { signOut } from 'firebase/auth';
 import { getToken, onMessage } from 'firebase/messaging';
 import '../styles/Dashboard.css';
 import '../styles/AIChatBot.css';
@@ -38,7 +37,6 @@ const Dashboard = () => {
   const [notifiedTasks, setNotifiedTasks] = useState([]);
 
   const user = auth.currentUser;
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (Notification.permission !== 'granted') {
@@ -203,27 +201,6 @@ const Dashboard = () => {
     }
   };
 
-  const handleLogout = async () => {
-    const confirmDelete = window.confirm("⚠️ Are you sure you want to logout and permanently delete your account?");
-    if (!confirmDelete) return;
-
-    try {
-      if (auth.currentUser) {
-        await auth.currentUser.delete(); // 🔥 Delete user account
-        console.log('✅ User account deleted');
-      }
-
-      await signOut(auth); // Sign out fallback
-      navigate('/login');
-    } catch (error) {
-      if (error.code === 'auth/requires-recent-login') {
-        alert("⚠️ Please re-login to delete your account.");
-      } else {
-        console.error('❌ Logout/Delete failed:', error);
-      }
-    }
-  };
-
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
@@ -232,7 +209,6 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-header-right">
           <Link to="/settings" className="settings-fixed-button">⚙️</Link>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
         </div>
       </header>
 

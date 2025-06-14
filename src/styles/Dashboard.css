@@ -54,8 +54,7 @@ html, body {
   margin-top: 8px;
 }
 
-.settings-fixed-button,
-.logout-btn {
+.settings-fixed-button {
   font-size: 14px;
   text-decoration: none;
   padding: 6px 14px;
@@ -64,25 +63,12 @@ html, body {
   cursor: pointer;
   border: none;
   transition: background 0.3s ease;
-}
-
-.settings-fixed-button {
   background-color: #eee;
   color: #333;
 }
 
 .settings-fixed-button:hover {
   background-color: #ddd;
-}
-
-.logout-btn {
-  background: linear-gradient(135deg, #7b4397, #dc2430);
-  color: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-.logout-btn:hover {
-  background: linear-gradient(135deg, #5e2a7d, #b51f29);
 }
 
 /* Task Entry - stays on screen */
@@ -185,7 +171,6 @@ html, body {
 }
 
 /* AI Assistant */
-/* 🤖 AI Assistant - Floating Button (Same as Add Task Style) */
 .ai-assistant-container {
   position: fixed;
   bottom: 16px;
@@ -194,8 +179,7 @@ html, body {
 }
 
 .ai-assistant-button {
- background: linear-gradient(135deg, #7b4397, #dc2430);
-
+  background: linear-gradient(135deg, #7b4397, #dc2430);
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -213,10 +197,8 @@ html, body {
 
 .ai-assistant-button:hover {
   background: linear-gradient(135deg, #7b4397, #dc2430);
-
 }
 
-/* 🤖 Icon Optional Styling */
 .ai-assistant-icon {
   font-size: 16px;
 }
@@ -236,7 +218,7 @@ html, body {
   }
 }
 
-/* Scrollbar Styling (for better aesthetics) */
+/* Scrollbar Styling */
 .task-list::-webkit-scrollbar {
   width: 6px;
 }
@@ -248,7 +230,6 @@ html, body {
   background: transparent;
 }
 
-/* 📱 Mobile Responsiveness */
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 12px;
@@ -269,7 +250,6 @@ html, body {
     width: 100%;
   }
 
-  .logout-btn,
   .settings-fixed-button {
     width: 100%;
     margin: 0;
