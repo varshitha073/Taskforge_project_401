@@ -88,7 +88,7 @@ const Dashboard = () => {
     if (dueSoon.length > 0) {
       setReminderText(`⏰ You have ${dueSoon.length} task(s) due soon!`);
       setShowReminder(true);
-      setTimeout(() => setShowReminder(false), 4000);
+      setTimeout(() => setShowReminder(false), 3000);
     }
   }, []);
 
@@ -131,7 +131,7 @@ const Dashboard = () => {
   const showNotification = (taskTitle) => {
     if (Notification.permission === "granted") {
       new Notification("⏰ Task Reminder", {
-        body: `Your task "${taskTitle}" is due soon!`,
+        body: `Your task \"${taskTitle}\" is due soon!`,
         icon: "/reminder-icon.png",
       });
     }
@@ -236,10 +236,18 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="toast-stack-container">
-        {showReminder && <Toast message={reminderText} />}
-        {toastMsg && <Toast message={toastMsg} />}
-      </div>
+      {(showReminder || toastMsg) && (
+        <div style={{
+          position: 'fixed',
+          top: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 9999
+        }}>
+          {showReminder && <Toast message={reminderText} />}
+          {toastMsg && <Toast message={toastMsg} />}
+        </div>
+      )}
 
       <div className="task-list responsive-task-list">
         {tasks.map((task) => (
@@ -261,11 +269,6 @@ const Dashboard = () => {
         onDelete={handleDelete}
         onToggleComplete={handleToggleComplete}
       />
-
-      <div style={{ position: 'fixed', bottom: '80px', right: '20px', zIndex: 9999 }}>
-        {showReminder && <Toast message={reminderText} />}
-        {toastMsg && <Toast message={toastMsg} />}
-      </div>
 
       <div className="ai-assistant-container">
         <AIChatBot />
