@@ -3,8 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
 import "../styles/Auth.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +24,12 @@ const Register = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      toast.success("🎉 Account created successfully!");
+      toast.success("🎉 Account created successfully!", {
+        autoClose: 3000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        draggable: true,
+      });
       console.log("✅ Account created. Redirecting to dashboard...");
       navigate("/dashboard");
     } catch (err) {
@@ -34,19 +38,23 @@ const Register = () => {
       switch (err.code) {
         case "auth/email-already-in-use":
           setError("❌ Email already in use. Try logging in.");
-          toast.error("🚫 Email already in use.");
+          toast.error("🚫 Email already in use.", { autoClose: 3000 });
           break;
         case "auth/invalid-email":
           setError("❌ Invalid email format.");
-          toast.error("🚫 Invalid email format.");
+          toast.error("🚫 Invalid email format.", { autoClose: 3000 });
           break;
         case "auth/weak-password":
           setError("❌ Password should be at least 6 characters.");
-          toast.error("⚠️ Weak password. Use at least 6 characters.");
+          toast.error("⚠️ Weak password. Use at least 6 characters.", {
+            autoClose: 3000,
+          });
           break;
         default:
           setError("❌ Registration failed. Please try again.");
-          toast.error("⚠️ Something went wrong. Please try again.");
+          toast.error("⚠️ Something went wrong. Please try again.", {
+            autoClose: 3000,
+          });
           break;
       }
     } finally {
@@ -84,16 +92,13 @@ const Register = () => {
       <p
         onClick={() => {
           console.log("➡️ Navigating to /login");
-          toast.info("🔐 Redirecting to Login...");
+          toast.info("🔐 Redirecting to Login...", { autoClose: 2000 });
           navigate("/login");
         }}
         className="switch-link"
       >
         🔐 Already have an account? Login
       </p>
-
-      {/* Toast container */}
-      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

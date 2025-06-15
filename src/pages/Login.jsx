@@ -3,8 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
 import "../styles/Auth.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,7 +21,12 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("✅ Login successful. Redirecting to dashboard...");
-      toast.success("🎉 Login successful!");
+      toast.success("🎉 Login successful!", {
+        autoClose: 3000,
+        pauseOnHover: true,
+        closeOnClick: true,
+        draggable: true,
+      });
       navigate("/dashboard");
     } catch (err) {
       console.error("❌ Login Error:", err);
@@ -32,27 +36,30 @@ const Login = () => {
         case "auth/user-not-found":
         case "auth/invalid-login-credentials":
           setError("❌ Email not registered. Redirecting to register page...");
-          toast.info("ℹ️ Email not registered. Redirecting...");
-          console.log("🔁 Redirecting to /register in 2 seconds...");
+          toast.info("ℹ️ Email not registered. Redirecting...", {
+            autoClose: 3000,
+          });
           setTimeout(() => {
             navigate("/register");
           }, 2000);
           break;
         case "auth/wrong-password":
           setError("❌ Incorrect password. Please try again.");
-          toast.error("🚫 Incorrect password.");
+          toast.error("🚫 Incorrect password.", { autoClose: 3000 });
           break;
         case "auth/invalid-email":
           setError("❌ Invalid email format.");
-          toast.error("🚫 Invalid email format.");
+          toast.error("🚫 Invalid email format.", { autoClose: 3000 });
           break;
         case "auth/too-many-requests":
           setError("❌ Too many failed attempts. Please try again later.");
-          toast.warn("⚠️ Too many attempts. Try later.");
+          toast.warn("⚠️ Too many attempts. Try later.", { autoClose: 3000 });
           break;
         default:
           setError("❌ Unexpected error: " + err.message);
-          toast.error("⚠️ Unexpected error: " + err.message);
+          toast.error("⚠️ Unexpected error: " + err.message, {
+            autoClose: 3000,
+          });
           break;
       }
     } finally {
@@ -93,16 +100,13 @@ const Login = () => {
         className="register-button"
         onClick={() => {
           console.log("➡️ Manually navigating to /register");
-          toast.info("🚀 Redirecting to Register...");
+          toast.info("🚀 Redirecting to Register...", { autoClose: 2000 });
           navigate("/register");
         }}
         disabled={loading}
       >
         ✨ New user? Create an account
       </button>
-
-      {/* Toast Notification Container */}
-      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };
