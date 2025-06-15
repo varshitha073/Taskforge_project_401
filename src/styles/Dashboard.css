@@ -120,11 +120,17 @@ html, body {
   flex: 1;
   overflow-y: auto;
   margin-top: 4px;
-  padding-right: 8px;
+  padding: 12px 8px 80px 8px; /* Top padding added */
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
 }
 
+/* ✅ Ensure Welcome Card is spaced from top */
+.task-list .task-card:first-child {
+  margin-top: 12px;
+}
+
+/* Task Card */
 .task-card {
   background: #fff;
   border-radius: 12px;

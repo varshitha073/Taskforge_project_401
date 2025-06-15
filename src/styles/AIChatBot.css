@@ -65,13 +65,20 @@ background: linear-gradient(135deg, #7b4397, #dc2430);
 }
 
 .chat-input button {
-  background: #6a5acd;
+  background: linear-gradient(135deg, #7b4397, #dc2430);
   color: white;
   border: none;
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
 }
+
+.chat-input button:hover {
+  background: linear-gradient(135deg, #5e2a7d, #b51f29);
+}
+
 
 .ai-container {
   position: fixed;
