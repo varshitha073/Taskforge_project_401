@@ -11,9 +11,10 @@ html, body {
   background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
   color: #333;
   height: 100%;
-  overflow: hidden; /* prevent outer scroll, allow task list scroll */
+  overflow: hidden;
 }
 
+/* Container */
 .dashboard-container {
   display: flex;
   flex-direction: column;
@@ -24,7 +25,7 @@ html, body {
   overflow: hidden;
 }
 
-/* Sticky Welcome/Header */
+/* Header */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -50,30 +51,29 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-top: 8px;
 }
 
 .settings-fixed-button {
   font-size: 14px;
-  text-decoration: none;
   padding: 6px 14px;
   border-radius: 6px;
   font-weight: 500;
-  cursor: pointer;
   border: none;
-  transition: background 0.3s ease;
   background-color: #eee;
   color: #333;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .settings-fixed-button:hover {
   background-color: #ddd;
 }
 
-/* Task Entry - stays on screen */
+/* Task Entry */
 .task-entry-container {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -83,17 +83,17 @@ html, body {
 .task-entry-container .task-card {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 12px;
 }
 
 .task-entry-container input,
 .task-entry-container textarea,
 .task-entry-container button {
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px;
+  border-radius: 10px;
   border: 1px solid #ccc;
+  font-size: 15px;
   font-family: 'Poppins', sans-serif;
-  font-size: 14px;
   width: 100%;
 }
 
@@ -107,30 +107,30 @@ html, body {
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
   border: none;
+  transition: background 0.3s ease;
 }
 
 .task-entry-container button:hover {
   background: linear-gradient(135deg, #5e2a7d, #b51f29);
 }
 
-/* Task List - Scrollable ONLY This */
+/* Scrollable Task List */
 .task-list {
   flex: 1;
   overflow-y: auto;
-  padding-right: 10px;
   margin-top: 4px;
+  padding-right: 8px;
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
 }
 
 .task-card {
-  background-color: white;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
 }
 
@@ -138,7 +138,7 @@ html, body {
   transform: scale(1.02);
 }
 
-/* Toast Notification */
+/* Toast Notifications */
 .toast-stack-container {
   position: fixed;
   bottom: 80px;
@@ -153,7 +153,7 @@ html, body {
   background: #222;
   color: #fff;
   padding: 12px 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.3s ease-out;
   max-width: 300px;
@@ -166,11 +166,11 @@ html, body {
   }
   to {
     opacity: 1;
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 }
 
-/* AI Assistant */
+/* AI Assistant Button */
 .ai-assistant-container {
   position: fixed;
   bottom: 16px;
@@ -180,14 +180,12 @@ html, body {
 
 .ai-assistant-button {
   background: linear-gradient(135deg, #7b4397, #dc2430);
-  color: white;
+  color: #fff;
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  border: none;
   padding: 10px 18px;
-  border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
   font-size: 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   display: flex;
@@ -196,20 +194,61 @@ html, body {
 }
 
 .ai-assistant-button:hover {
-  background: linear-gradient(135deg, #7b4397, #dc2430);
+  background: linear-gradient(135deg, #5e2a7d, #b51f29);
 }
 
 .ai-assistant-icon {
   font-size: 16px;
 }
 
-/* 📱 Mobile Responsiveness */
+/* 📱 Mobile Enhancements */
 @media (max-width: 768px) {
+  .dashboard-container {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dashboard-header-left h3 {
+    font-size: 16px;
+  }
+
+  .task-entry-container,
+  .task-card,
+  .toast-container {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .task-entry-container input,
+  .task-entry-container textarea,
+  .task-entry-container button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .settings-fixed-button {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .task-list {
+    padding-bottom: 80px;
+  }
+
+  .toast-container {
+    max-width: 90%;
+    font-size: 13px;
+  }
+
   .ai-assistant-button {
-    width: auto;
-    font-size: 15px;
-    padding: 10px 16px;
-    border-radius: 8px;
+    font-size: 13px;
+    padding: 8px 14px;
   }
 
   .ai-assistant-container {
@@ -228,48 +267,4 @@ html, body {
 }
 .task-list::-webkit-scrollbar-track {
   background: transparent;
-}
-
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 12px;
-    gap: 12px;
-  }
-
-  .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .task-entry-container,
-  .task-card,
-  .dashboard-header,
-  .toast-container {
-    font-size: 14px;
-    width: 100%;
-  }
-
-  .settings-fixed-button {
-    width: 100%;
-    margin: 0;
-  }
-
-  .task-entry-container input,
-  .task-entry-container textarea,
-  .task-entry-container button {
-    font-size: 15px;
-  }
-
-  .dashboard-header-left h3 {
-    font-size: 16px;
-  }
-
-  .toast-container {
-    max-width: 90%;
-  }
-
-  .task-list {
-    padding-bottom: 60px;
-  }
 }

@@ -6,38 +6,38 @@
   box-sizing: border-box;
 }
 
-body, html {
+html, body {
   height: 100%;
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
 }
 
 .auth-container {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
-  padding: 40px 30px;
+  padding: 30px 25px;
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  animation: fadeIn 0.6s ease;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.6s ease-in-out;
 }
 
 .auth-container h2 {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .auth-container .error {
-  background: rgba(255, 0, 0, 0.1);
+  background: rgba(255, 0, 0, 0.15);
   color: #ff4d4d;
   padding: 10px;
   border-radius: 8px;
@@ -48,11 +48,11 @@ body, html {
 .auth-container form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .auth-container input {
-  padding: 12px 15px;
+  padding: 12px 14px;
   border-radius: 10px;
   border: none;
   outline: none;
@@ -63,83 +63,40 @@ body, html {
 }
 
 .auth-container input::placeholder {
-  color: rgba(30, 30, 30, 0.7); /* darker placeholder for readability */
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .auth-container input:focus {
-  background: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
 
-.auth-container button {
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #4a148c;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.auth-container button:hover {
-  background: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-}
-
-.switch-link {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #222;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.switch-link:hover {
-  color: #000;
-  text-decoration: underline;
-}
-
-@media (max-width: 500px) {
-  .auth-container {
-    padding: 30px 20px;
-  }
-
-  .auth-container h2 {
-    font-size: 24px;
-  }
-
-  .auth-container input,
-  .auth-container button {
-    font-size: 14px;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+.auth-container button,
 .register-button {
   padding: 12px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-  color: #fff;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 10px;
+}
+
+.auth-container button {
+  background: rgba(255, 255, 255, 0.9);
+  color: #4a148c;
+}
+
+.auth-container button:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.register-button {
+  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  color: #fff;
+  margin-top: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -147,4 +104,52 @@ body, html {
   transform: translateY(-2px);
   background: linear-gradient(135deg, #9575cd 0%, #f8bbd0 100%);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.switch-link {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #f5f5f5;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.switch-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Mobile-first styles */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 25px 20px;
+    max-width: 90vw;
+  }
+
+  .auth-container h2 {
+    font-size: 22px;
+  }
+
+  .auth-container input,
+  .auth-container button,
+  .register-button {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .switch-link {
+    font-size: 13px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
