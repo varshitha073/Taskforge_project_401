@@ -12,43 +12,23 @@ html {
   height: 100%;
   background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
   color: #333;
+  overflow: hidden;
 }
 
 .settings-container {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   padding: 24px 16px;
-  overflow-y: auto;
-}
-
-.settings-card {
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(16px);
-  border-radius: 20px;
-  padding: 32px 24px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  gap: 16px;
 }
 
 h2 {
   text-align: center;
   font-size: 26px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   color: #222;
 }
 
@@ -56,23 +36,29 @@ h2 {
   background: rgba(255, 255, 255, 0.35);
   border-left: 4px solid #6c63ff;
   padding: 10px 14px;
-  margin-bottom: 18px;
   font-weight: 500;
   font-size: 14px;
   border-radius: 8px;
   text-align: center;
+  width: 100%;
+  max-width: 420px;
 }
 
 .setting-item {
-  margin-bottom: 18px;
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .setting-item label {
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 6px;
   color: #222;
 }
 
@@ -91,7 +77,6 @@ h2 {
 }
 
 .setting-item button {
-  margin-top: 10px;
   background: #6c63ff;
   color: #fff;
   border: none;
@@ -122,7 +107,6 @@ h2 {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 12px;
 }
 
 .danger:hover {
@@ -148,15 +132,10 @@ h2 {
   background: #4e50be;
 }
 
-/* ✅ Mobile Optimized */
+/* ✅ Mobile Optimization */
 @media (max-width: 500px) {
   .settings-container {
     padding: 20px 12px;
-  }
-
-  .settings-card {
-    padding: 24px 18px;
-    max-width: 95%;
   }
 
   h2 {
@@ -165,7 +144,10 @@ h2 {
 
   .alert-message {
     font-size: 13px;
-    padding: 10px;
+  }
+
+  .setting-item {
+    padding: 12px;
   }
 
   .setting-item input,
