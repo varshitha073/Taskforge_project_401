@@ -5,6 +5,9 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
+import About from './pages/About';       // 🔹 NEW
+import Features from './pages/Features'; // 🔹 NEW
+import Contact from './pages/Contact';   // 🔹 NEW
 import { auth } from './firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ToastContainer } from 'react-toastify';
@@ -60,6 +63,11 @@ const App = () => {
         <Route path="/signup" element={<Register />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
+
+        {/* New Static Info Pages */}
+        <Route path="/about" element={<About />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/contact" element={<Contact />} />
 
         {/* Protected Routes */}
         <Route

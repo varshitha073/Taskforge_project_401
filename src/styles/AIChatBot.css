@@ -12,7 +12,7 @@
 }
 
 .chat-header {
-background: linear-gradient(135deg, #7b4397, #dc2430);
+  background: linear-gradient(135deg, #845ec2, #d65db1);
   color: white;
   padding: 10px;
   border-top-left-radius: 12px;
@@ -65,7 +65,7 @@ background: linear-gradient(135deg, #7b4397, #dc2430);
 }
 
 .chat-input button {
-  background: linear-gradient(135deg, #7b4397, #dc2430);
+    background: linear-gradient(135deg, #845ec2, #d65db1);
   color: white;
   border: none;
   padding: 6px 12px;
@@ -76,7 +76,7 @@ background: linear-gradient(135deg, #7b4397, #dc2430);
 }
 
 .chat-input button:hover {
-  background: linear-gradient(135deg, #5e2a7d, #b51f29);
+    background: linear-gradient(135deg, #845ec2, #d65db1);
 }
 
 

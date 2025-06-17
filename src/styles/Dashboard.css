@@ -23,6 +23,7 @@ html, body {
   gap: 16px;
   max-width: 100%;
   overflow: hidden;
+  
 }
 
 /* Header */
@@ -39,13 +40,15 @@ html, body {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(6px);
-  margin-top: 12px; /* ✅ ADDED SPACING FROM TOP */
+  margin-top: 12px;
+   background-color: linear-gradient(135deg, #845ec2, #d65db1);
 }
 
 .dashboard-header-left h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
+
 }
 
 .dashboard-header-right {
@@ -62,14 +65,14 @@ html, body {
   border-radius: 6px;
   font-weight: 500;
   border: none;
-  background-color: #eee;
-  color: #333;
+  background: linear-gradient(135deg, #845ec2, #d65db1);
+  color: white;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .settings-fixed-button:hover {
-  background-color: #ddd;
+  opacity: 0.9;
 }
 
 /* Task Entry */
@@ -104,7 +107,7 @@ html, body {
 }
 
 .task-entry-container button {
-  background: linear-gradient(135deg, #7b4397, #dc2430);
+  background: linear-gradient(135deg, #845ec2, #d65db1);
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -113,7 +116,7 @@ html, body {
 }
 
 .task-entry-container button:hover {
-  background: linear-gradient(135deg, #5e2a7d, #b51f29);
+  opacity: 0.9;
 }
 
 /* Scrollable Task List */
@@ -121,17 +124,15 @@ html, body {
   flex: 1;
   overflow-y: auto;
   margin-top: 4px;
-  padding: 12px 8px 80px 8px; /* Top padding added */
+  padding: 12px 8px 80px 8px;
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
 }
 
-/* ✅ Ensure Welcome Card is spaced from top */
 .task-list .task-card:first-child {
   margin-top: 12px;
 }
 
-/* Task Card */
 .task-card {
   background: #fff;
   border-radius: 12px;
@@ -186,7 +187,7 @@ html, body {
 }
 
 .ai-assistant-button {
-  background: linear-gradient(135deg, #7b4397, #dc2430);
+  background: linear-gradient(135deg, #845ec2, #d65db1);
   color: #fff;
   font-weight: 600;
   padding: 10px 18px;
@@ -201,14 +202,26 @@ html, body {
 }
 
 .ai-assistant-button:hover {
-  background: linear-gradient(135deg, #5e2a7d, #b51f29);
+  opacity: 0.9;
 }
 
 .ai-assistant-icon {
   font-size: 16px;
 }
 
-/* 📱 Mobile Enhancements */
+/* Welcome Sunkara */
+.welcome-container {
+  background: linear-gradient(135deg, #845ec2, #d65db1);
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+/* Mobile Enhancements */
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 12px;
@@ -219,7 +232,7 @@ html, body {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    margin-top: 16px; /* Extra space for mobile top view */
+    margin-top: 16px;
   }
 
   .dashboard-header-left h3 {

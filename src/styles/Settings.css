@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 * {
   margin: 0;
@@ -6,196 +6,148 @@
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-  width: 100%;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden; /* prevent scrollbars */
-  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(to right, #a18cd1, #fbc2eb);
+  height: 100vh;
+  overflow-x: hidden;
 }
 
-/* ✅ Fullscreen Flex Layout */
-body {
+.settings-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
 }
 
-/* ✅ Full Viewport Container */
-.settings-container {
-  width: 100vw;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 20px;
-  gap: 16px;
-  overflow: hidden;
+.settings-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+  position: relative;
+  color: #111;
 }
 
-/* ✅ Settings Heading */
-h2 {
+.settings-card h2 {
+  text-align: center;
   font-size: 2rem;
-  color: #fff;
+  margin-bottom: 1rem;
   font-weight: 700;
-  margin: 0;
-  text-align: center;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  color: #111;
 }
 
-/* ✅ Message */
 .alert-message {
-  background: rgba(255, 255, 255, 0.4);
-  border-left: 4px solid #6c63ff;
-  padding: 10px 14px;
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px 16px;
   border-radius: 10px;
-  text-align: center;
-  width: 100%;
-  max-width: 420px;
-  font-size: 14px;
+  margin-bottom: 1rem;
   font-weight: 500;
+  text-align: center;
 }
 
-/* ✅ Settings Card */
 .setting-item {
-  background: rgba(255, 255, 255, 0.35);
-  padding: 14px 16px;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
 }
 
 .setting-item label {
-  font-size: 14px;
   font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
   color: #222;
 }
 
 .setting-item input {
+  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.85);
-  font-size: 15px;
-}
-
-.setting-item input:focus {
-  border-color: #6c63ff;
-  outline: none;
-}
-
-.setting-item button {
-  padding: 10px 14px;
-  font-size: 15px;
-  background: #6c63ff;
-  color: white;
+  font-size: 1rem;
+  border-radius: 12px;
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Buttons with New Gradient */
+.setting-item button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #845ec2, #d65db1);
+  color: white;
   font-weight: 600;
-  transition: background 0.3s ease;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 .setting-item button:hover {
-  background: #5a52d3;
+  transform: scale(1.03);
 }
 
-/* ✅ Danger Zone */
-.danger-zone label {
-  color: #d32f2f;
-  font-size: 15px;
-  font-weight: 600;
-}
-
+/* ❌ Delete Button */
 .danger {
-  background: #e53935;
+  background: linear-gradient(to right, #ef5350, #e53935);
   color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .danger:hover {
-  background: #c62828;
+  background: linear-gradient(to right, #d32f2f, #b71c1c);
 }
 
-/* ✅ Back Button */
+/* 🔙 Back Button */
 .back-button {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  background: #5e60ce;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #845ec2, #d65db1);
   color: white;
-  padding: 6px 12px;
-  font-size: 15px;
   border: none;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
   cursor: pointer;
-  z-index: 10;
-  transition: background 0.3s ease;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .back-button:hover {
-  background: #4e50be;
+  transform: scale(1.05);
 }
 
-/* ✅ Responsive Font Scaling */
-@media (max-width: 500px) {
-  h2 {
-    font-size: 1.5rem;
+.danger-zone label {
+  color: #b71c1c;
+}
+
+/* 📱 Media Query */
+@media (max-width: 600px) {
+  .settings-card {
+    padding: 1.5rem;
   }
 
-  .alert-message,
-  .setting-item input,
+  .settings-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .setting-item input {
+    font-size: 0.95rem;
+  }
+
   .setting-item button {
-    font-size: 13px;
-  }
-
-  .setting-item {
-    padding: 12px;
+    font-size: 0.95rem;
+    padding: 10px;
   }
 
   .back-button {
-    font-size: 13px;
-    padding: 5px 10px;
-  }
-}
-
-@media (min-width: 1441px) {
-  .settings-container {
-    gap: 20px;
-    padding: 40px;
-  }
-
-  h2 {
-    font-size: 2.2rem;
-  }
-
-  .setting-item {
-    max-width: 600px;
-    padding: 20px;
-  }
-
-  .alert-message {
-    max-width: 600px;
-    font-size: 16px;
-  }
-
-  .setting-item input,
-  .setting-item button {
-    font-size: 17px;
-  }
-
-  .back-button {
-    font-size: 16px;
-    padding: 8px 16px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
   }
 }
