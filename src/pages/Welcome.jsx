@@ -9,7 +9,7 @@ const Welcome = () => {
 
   const handleNav = (path) => {
     navigate(path);
-    setMenuOpen(false); // Close menu after navigation on mobile
+    setMenuOpen(false);
   };
 
   return (
@@ -18,14 +18,14 @@ const Welcome = () => {
       <nav className="navbar">
         <div className="navbar-logo">🚀 TaskForge</div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <div className="navbar-links">
           <button onClick={() => handleNav('/about')}>About</button>
           <button onClick={() => handleNav('/features')}>Features</button>
           <button onClick={() => handleNav('/contact')}>Contact</button>
         </div>
 
-        {/* Hamburger Icon (Mobile Only) */}
+        {/* Mobile Menu Icon */}
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           <div className="bar"></div>
           <div className="bar"></div>
@@ -42,9 +42,10 @@ const Welcome = () => {
         </div>
       )}
 
-      {/* Background & Main */}
+      {/* Background Overlay */}
       <div className="background-animation"></div>
 
+      {/* Main Content */}
       <div className="welcome-content">
         <h1 className="logo">🚀 TaskForge</h1>
         <p className="quote">{quote}</p>
