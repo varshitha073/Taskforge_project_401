@@ -63,42 +63,44 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2>📝 Create Account</h2>
-      {error && <p className="error">{error}</p>}
+    <div className="auth-wrapper">
+      <div className="auth-container">
+        <h2>📝 Create Account</h2>
+        {error && <p className="error">{error}</p>}
 
-      <form onSubmit={handleRegister}>
-        <input
-          type="email"
-          placeholder="📧 Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={loading}
-        />
-        <input
-          type="password"
-          placeholder="🔑 Password (min 6 chars)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          disabled={loading}
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Creating..." : "Sign Up"}
-        </button>
-      </form>
+        <form onSubmit={handleRegister}>
+          <input
+            type="email"
+            placeholder="📧 Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={loading}
+          />
+          <input
+            type="password"
+            placeholder="🔑 Password (min 6 chars)"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={loading}
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating..." : "Sign Up"}
+          </button>
+        </form>
 
-      <p
-        onClick={() => {
-          console.log("➡️ Navigating to /login");
-          toast.info("🔐 Redirecting to Login...", { autoClose: 2000 });
-          navigate("/login");
-        }}
-        className="switch-link"
-      >
-        🔐 Already have an account? Login
-      </p>
+        <p
+          onClick={() => {
+            console.log("➡️ Navigating to /login");
+            toast.info("🔐 Redirecting to Login...", { autoClose: 2000 });
+            navigate("/login");
+          }}
+          className="switch-link"
+        >
+          🔐 Already have an account? Login
+        </p>
+      </div>
     </div>
   );
 };

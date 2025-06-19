@@ -69,44 +69,46 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2>🔐 Welcome Back</h2>
+    <div className="auth-wrapper">
+      <div className="auth-container">
+        <h2>🔐 Welcome Back</h2>
 
-      {error && <p className="error">{error}</p>}
+        {error && <p className="error">{error}</p>}
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="📧 Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="📧 Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={loading}
+          />
+          <input
+            type="password"
+            placeholder="🔑 Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={loading}
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <button
+          className="register-button"
+          onClick={() => {
+            console.log("➡️ Manually navigating to /register");
+            toast.info("🚀 Redirecting to Register...", { autoClose: 2000 });
+            navigate("/register");
+          }}
           disabled={loading}
-        />
-        <input
-          type="password"
-          placeholder="🔑 Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          disabled={loading}
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
+        >
+          ✨ New user? Create an account
         </button>
-      </form>
-
-      <button
-        className="register-button"
-        onClick={() => {
-          console.log("➡️ Manually navigating to /register");
-          toast.info("🚀 Redirecting to Register...", { autoClose: 2000 });
-          navigate("/register");
-        }}
-        disabled={loading}
-      >
-        ✨ New user? Create an account
-      </button>
+      </div>
     </div>
   );
 };

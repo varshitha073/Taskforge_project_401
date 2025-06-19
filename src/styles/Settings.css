@@ -1,38 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
+/* ========== Global Reset ========== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ========== Body ========== */
 body {
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(to right, #a18cd1, #fbc2eb);
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
+/* ========== Main Container ========== */
 .settings-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 1rem;
+  max-height: 100vh;
+  overflow-y: auto; /* ✅ Enable scroll */
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #a18cd1, #fbc2eb);
 }
 
+/* ========== Card ========== */
 .settings-card {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(12px);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 2rem 2rem 3rem; /* ✅ bottom padding */
   max-width: 500px;
   width: 100%;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
   position: relative;
   color: #111;
+  box-sizing: border-box;
 }
 
+/* ========== Headings ========== */
 .settings-card h2 {
   text-align: center;
   font-size: 2rem;
@@ -41,6 +51,7 @@ body {
   color: #111;
 }
 
+/* ========== Alert ========== */
 .alert-message {
   background-color: #fff3cd;
   color: #856404;
@@ -51,6 +62,7 @@ body {
   text-align: center;
 }
 
+/* ========== Form Item ========== */
 .setting-item {
   margin-bottom: 1.5rem;
 }
@@ -73,7 +85,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Buttons with New Gradient */
+/* ========== Buttons ========== */
 .setting-item button {
   width: 100%;
   margin-top: 10px;
@@ -127,10 +139,10 @@ body {
   color: #b71c1c;
 }
 
-/* 📱 Media Query */
+/* ========== Responsive (Small Devices) ========== */
 @media (max-width: 600px) {
   .settings-card {
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 2.5rem;
   }
 
   .settings-card h2 {
@@ -149,5 +161,19 @@ body {
   .back-button {
     padding: 6px 12px;
     font-size: 0.9rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .settings-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow-y: auto; /* ✅ Force scroll on short height screens */
+    align-items: flex-start;
+  }
+
+  .settings-card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 }
